@@ -1,0 +1,19 @@
+# Site settings
+title: /dev/life
+email:
+description: > # this means to ignore newlines until "baseurl:"
+  Hi, I'm Matt. I'm a software engineer working in NYC. This blog is for my thoughts and stories on software development, other interests, and whatever tickles my fancy
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://mathieu7.github.io" # the base hostname & protocol for your site
+github_username:  mathieu7
+
+# Layout settings
+header_type: default  # values [ drawer, default ]
+post_type: default    # values [ highlight, default ]
+pagination_type: default  # values [ ops, default ]
+
+disqus: true
+disqus_shortname: mathieu7dev
+
+# Build settings
+markdown: kramdown

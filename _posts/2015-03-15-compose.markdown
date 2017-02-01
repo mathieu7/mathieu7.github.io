@@ -1,0 +1,67 @@
+---
+layout: post
+title:  "Music composition with Compose and Scala"
+date:   2015-03-15 23:18:51
+categories: scala compose music
+disqus: true
+---
+
+I found a nice article a week ago on Hacker News about Compose, a declarative and functional
+compositional language built using Scala.
+
+The article is here: http://underscore.io/blog/posts/2015/03/05/compositional-music-composition.html
+
+Scala is an object-functional programming language that compiles to java bytecode. Its flexibility lends
+itself to creating nice functional DSLs (domain specific languages) like Compose.
+
+The goal of Compose is to provide a simple syntax for compiling music compositions.
+The base component of music composition is a note, which is simply a pitch/frequency (like C or A-sharp, etc.)
+with a certain duration (quarter note, half note, etc.).
+
+Using compose, you can define a note like so:
+
+{% highlight scala %}
+As4.q
+{% endhighlight %}
+
+This means "I want an A-sharp note with a quarter note duration.".
+The 4 represents the octave; the higher the octave, the higher the frequency.
+
+This is not nearly enough, however, to create a score (a combinations of notes and rests) to form an actual song.
+
+So you can combine these notes to play in sequence like so:
+
+{% highlight scala %}
+C3.q + D3.q + E3.q + F3.q + G3.q + A3.q + B3.q + C4.q
+{% endhighlight %}
+
+Look familiar? It's the C-Major scale. While a good start, it is still not enough.
+What if you want multiple notes to be played in parallel, to create chords?
+Compose allows for that as well.
+
+You can use the &#124; symbol to denote notes or sequences that should be played in parallel.
+
+{% highlight scala %}
+C3.q | E3.q | G3.q
+{% endhighlight %}
+
+There is a simple C-Major chord. You can combine chords and sequences as well.
+
+I decided to put the language to the test with classic Coldplay song Clocks:
+
+{% highlight scala %}
+def clocks = {
+    val bass = (G3.w | As3.w | Ds3.w)+
+               (F3.w | As3.w | Cs3.w) +
+               (F3.w | As3.w | Cs3.w) +
+               (F3.w | Gs3.w | C3.w)
+    val treble = (Ds3.s + As3.s + G3.s + Ds3.s) +
+                 (As3.s + G3.s + Ds3.s + As3.s) +
+                 (Ds3.s + As3.s + G3.s + Ds3.s) +
+                 (As3.s + G3.s + Ds3.s + As3.s)
+    (bass transpose 12) | ((treble transpose 24) * 4)
+  }
+{% endhighlight %}
+
+This is a rather simple example, but it works. But it is missing something, we're missing the classic accent
+that comes after every 3 sixteen notes. Compose doesn't support dynamics.
