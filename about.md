@@ -5,6 +5,8 @@ permalink: /about/
 ---
 ###### Hi, I'm Matt.
 
+![Hi, I'm Matt](/assets/P3.jpg)
+
 I'm a software engineer out of New Jersey. I've worked as a Full Stack Engineer,
 but primarily as an Android Developer since 2011.
 
